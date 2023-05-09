@@ -1,17 +1,15 @@
-﻿using System.Reflection;
+﻿using Newtonsoft.Json;
 using System.Xml.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace ConsoleApp73
 {
     public static class Parser
     {
-        public static event EventHandler OnSerializing;
+        public static event EventHandler? OnSerializing;
 
         public static void WriteIntoFile(string filePath, object? obj)
         {
-            if (obj == null)
+            if (obj is null)
             {
                 throw new ArgumentNullException(nameof(obj));
             }
@@ -41,6 +39,11 @@ namespace ConsoleApp73
 
         public static void SerializeJson(string filePath, object? obj)
         {
+            if (obj is null)
+            {
+                throw new ArgumentNullException();
+            }
+
             var serializedObject = JsonConvert.SerializeObject(obj);
 
             using (StreamWriter sw = new StreamWriter(File.Open(filePath, FileMode.Append)))

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleApp73
+﻿namespace ConsoleApp73
 {
     public static class ConsoleInputHandler
     {

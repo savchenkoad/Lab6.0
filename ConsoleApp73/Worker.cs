@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 
 namespace ConsoleApp73
 {
@@ -118,9 +113,9 @@ namespace ConsoleApp73
         public override string ToString()
         {
             var fields = GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-            
+
             var thisObj = this;
-            
+
             var values = fields.Select(x => x.GetValue(thisObj));
 
             return string.Join(' ', values);

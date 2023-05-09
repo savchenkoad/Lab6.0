@@ -1,9 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Xml.Serialization;
-using System.Reflection;
-
-namespace ConsoleApp73
+﻿namespace ConsoleApp73
 {
     internal class Program
     {
@@ -30,7 +25,7 @@ namespace ConsoleApp73
             await Task.WhenAll(xmlSerializingTask, jsonSerializingTask);
         }
 
-        async static Task SerializeAllXml<T>(string filePath, T[] objects) where T: struct
+        async static Task SerializeAllXml<T>(string filePath, T[] objects) where T : struct
         {
             await Task.Delay(3000);
 
