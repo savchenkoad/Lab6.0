@@ -10,10 +10,10 @@
 
             Array.Sort(workers);
 
-            var xmlSerializingTask = SerializeAllXml("worker.xml", workers);
-            var jsonSerializingTask = SerializeAllJson("worker.json", workers);
+            var xmlSerializingTask = Parser.SerializeAllXml("worker.xml", workers);
+            var jsonSerializingTask = Parser.SerializeAllJson("worker.json", workers);
 
-            WriteAllIntoFile("worker.txt", workers);
+            Parser.WriteAllIntoFile("worker.txt", workers);
 
             Console.WriteLine("Enter the experience");
             int.TryParse(Console.ReadLine(), out int experience);
@@ -23,40 +23,6 @@
             var efw = Parser.DeserializeAllJson("worker.json");
 
             await Task.WhenAll(xmlSerializingTask, jsonSerializingTask);
-        }
-
-        async static Task SerializeAllXml<T>(string filePath, T[] objects) where T : struct
-        {
-            await Task.Delay(3000);
-
-            await Task.Run(() =>
-            {
-                foreach (object obj in objects!)
-                {
-                    Parser.SerializeXml(filePath, obj);
-                }
-            });
-        }
-
-        async static Task SerializeAllJson<T>(string filePath, T[] objects)
-        {
-            await Task.Delay(4000);
-
-            await Task.Run(() =>
-            {
-                foreach (var item in objects)
-                {
-                    Parser.SerializeJson(filePath, item);
-                }
-            });
-        }
-
-        static void WriteAllIntoFile<T>(string filePath, T[] values) where T : struct
-        {
-            foreach (var item in values)
-            {
-                Parser.WriteIntoFile(filePath, item);
-            }
         }
 
         static void PrintWorkersWithExperienceMoreThan(int experience, Worker[] workers)

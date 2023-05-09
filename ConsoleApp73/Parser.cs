@@ -20,6 +20,14 @@ namespace ConsoleApp73
             };
         }
 
+        public static void WriteAllIntoFile<T>(string filePath, T[] values) where T : struct
+        {
+            foreach (var item in values)
+            {
+                WriteIntoFile(filePath, item);
+            }
+        }
+
         public static void SerializeXml(string filePath, object? obj)
         {
             if (obj is null)
@@ -52,6 +60,32 @@ namespace ConsoleApp73
 
                 OnSerializing?.Invoke(obj, EventArgs.Empty);
             }
+        }
+
+        public async static Task SerializeAllXml<T>(string filePath, T[] objects) where T : struct
+        {
+            await Task.Delay(3000);
+
+            await Task.Run(() =>
+            {
+                foreach (object obj in objects!)
+                {
+                    SerializeXml(filePath, obj);
+                }
+            });
+        }
+
+        public async static Task SerializeAllJson<T>(string filePath, T[] objects)
+        {
+            await Task.Delay(4000);
+
+            await Task.Run(() =>
+            {
+                foreach (var item in objects)
+                {
+                    SerializeJson(filePath, item);
+                }
+            });
         }
 
         public static List<object> DeserializeAllJson(string filePath)
